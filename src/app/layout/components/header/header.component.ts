@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, HostListener, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, HostListener, Input, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 
 @Component({
@@ -7,11 +7,12 @@ import {Router} from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
   public isSticky = false;
+  public toggler = false;
 
   @Input() menuData;
   @ViewChild('navbarArea') navbarArea;
 
-  constructor(private router: Router, private ref: ChangeDetectorRef) {
+  constructor(private router: Router) {
     this.onScroll();
   }
 
@@ -40,6 +41,18 @@ export class HeaderComponent implements OnInit {
     } else {
       this.isSticky = false;
     }
+  }
+
+  onTogglerClick() {
+    this.toggler = !this.toggler;
+  }
+
+  onMenuItemClick() {
+    this.toggler = false;
+  }
+
+  get isTogglerActive() {
+    return this.toggler;
   }
 
 }
