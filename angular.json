@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angular-starter-buttercms": {
+    "angular-tour-of-heroes": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,12 +13,11 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/angular-starter-buttercms",
+            "outputPath": "dist/angular-tour-of-heroes",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
-            "aot": true,
             "assets": [
               "src/favicon.ico",
               "src/assets"
@@ -26,7 +25,13 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -56,23 +61,24 @@
                 }
               ]
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "angular-starter-buttercms:build"
+            "browserTarget": "angular-tour-of-heroes:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "angular-starter-buttercms:build:production"
+              "browserTarget": "angular-tour-of-heroes:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "angular-starter-buttercms:build"
+            "browserTarget": "angular-tour-of-heroes:build"
           }
         },
         "test": {
@@ -92,33 +98,20 @@
             "scripts": []
           }
         },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "tsconfig.app.json",
-              "tsconfig.spec.json",
-              "e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        },
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "angular-starter-buttercms:serve"
+            "devServerTarget": "angular-tour-of-heroes:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "angular-starter-buttercms:serve:production"
+              "devServerTarget": "angular-tour-of-heroes:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "angular-starter-buttercms"
+  "defaultProject": "angular-tour-of-heroes"
 }
