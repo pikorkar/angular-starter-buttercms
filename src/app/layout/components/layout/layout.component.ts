@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {environment} from '@butterCMS/environment';
 import {ButtercmssdkService} from '../../../services/buttercmssdk.service';
 
 @Component({
@@ -20,7 +19,7 @@ export class LayoutComponent implements OnInit {
   }
 
   isApiToken(): boolean {
-    return !!environment.ANGULAR_APP_BUTTER_CMS_API_KEY;
+    return !!process.env.NG_APP_ANGULAR_APP_BUTTER_CMS_API_KEY;
   }
 
 }

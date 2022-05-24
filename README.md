@@ -39,4 +39,4 @@ The ButterCMS webhook settings are located at https://buttercms.com/webhooks/
 
 ### 6. Previewing Draft Changes
 
-By default, your starter project is set up to allow previewing of draft changes saved in your ButterCMS.com account. To disable this functionality, set the following value in your .env file: REACT_APP_BUTTER_CMS_PREVIEW=false
+By default, your starter project is set up to allow previewing of draft changes saved in your ButterCMS.com account. To disable this functionality, set the following value in your .env file: NG_APP_ANGULAR_APP_BUTTER_CMS_PREVIEW=false

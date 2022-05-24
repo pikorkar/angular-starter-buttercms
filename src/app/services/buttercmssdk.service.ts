@@ -1,5 +1,4 @@
 import Butter from 'buttercms';
-import {environment} from '@butterCMS/environment';
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 
@@ -11,8 +10,9 @@ export class ButtercmssdkService {
   }
 
   getButterCMS() {
-    const butterCmsPreview = !(environment.ANGULAR_APP_BUTTER_CMS_PREVIEW === 'false' || environment.ANGULAR_APP_BUTTER_CMS_PREVIEW === '0');
-    return Butter(environment.ANGULAR_APP_BUTTER_CMS_API_KEY, butterCmsPreview);
+    const butterCmsPreview = !(process.env.NG_APP_ANGULAR_APP_BUTTER_CMS_PREVIEW === 'false' ||
+      process.env.NG_APP_ANGULAR_APP_BUTTER_CMS_PREVIEW === '0');
+    return Butter(process.env.NG_APP_ANGULAR_APP_BUTTER_CMS_API_KEY, butterCmsPreview);
   }
 
   navigateToNotFound() {

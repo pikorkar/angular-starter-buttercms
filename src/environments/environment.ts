@@ -3,9 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
-  ANGULAR_APP_BUTTER_CMS_API_KEY: '',
-  ANGULAR_APP_BUTTER_CMS_PREVIEW: 'false'
+  production: false
 };
 
 /*

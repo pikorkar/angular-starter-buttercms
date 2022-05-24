@@ -16,12 +16,7 @@
     "lib": [
       "es2018",
       "dom"
-    ],
-    "paths": {
-      "@butterCMS/environment": [
-        "src/environments/environment"
-      ]
-    }
+    ]
   },
 
   "angularCompilerOptions": {
