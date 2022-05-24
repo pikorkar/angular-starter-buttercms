@@ -20,7 +20,7 @@ export class LayoutComponent implements OnInit {
   }
 
   isApiToken(): boolean {
-    return !!environment.REACT_APP_BUTTER_CMS_API_KEY;
+    return !!environment.ANGULAR_APP_BUTTER_CMS_API_KEY;
   }
 
 }

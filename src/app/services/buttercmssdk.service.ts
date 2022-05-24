@@ -11,8 +11,8 @@ export class ButtercmssdkService {
   }
 
   getButterCMS() {
-    const butterCmsPreview = !(environment.REACT_APP_BUTTER_CMS_PREVIEW === 'false' || environment.REACT_APP_BUTTER_CMS_PREVIEW === '0');
-    return Butter(environment.REACT_APP_BUTTER_CMS_API_KEY, butterCmsPreview);
+    const butterCmsPreview = !(environment.ANGULAR_APP_BUTTER_CMS_PREVIEW === 'false' || environment.ANGULAR_APP_BUTTER_CMS_PREVIEW === '0');
+    return Butter(environment.ANGULAR_APP_BUTTER_CMS_API_KEY, butterCmsPreview);
   }
 
   navigateToNotFound() {
