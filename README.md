@@ -1,27 +1,42 @@
-# AngularTourOfHeroes
+![recommended node version](https://img.shields.io/badge/node-v16-green)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.1.4.
+# Angular + ButterCMS Starter Project
 
-## Development server
+This Angular starter project fully integrates with dynamic sample content from your ButterCMS account, including main menu, pages, blog posts, categories, and tags, all with a beautiful, custom theme with already-implemented search functionality. All of the included sample content is automatically created in your account dashboard when you sign up for a free trial of ButterCMS.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## 1. Installation
 
-## Build
+First, clone the repo and install the dependencies by running `npm install`
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+```bash
+git clone https:
+cd react-starter-buttercms
+npm install
+```
 
-## Running unit tests
+### 2. Set API Token
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+To fetch your ButterCMS content, add your API token as an environment variable.
 
-## Running end-to-end tests
+### 3. Run local server
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+To view the app in the browser, you'll need to run the local development server:
 
-## Further help
+```bash
+$ npm run start
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Congratulations! Your starter project is now live at [http://localhost:4200/](http://localhost:4200/).
+
+## 4. Deploy on Vercel
+
+
+### 5. Webhooks
+
+The ButterCMS webhook settings are located at https://buttercms.com/webhooks/
+
+### 6. Previewing Draft Changes
+
+By default, your starter project is set up to allow previewing of draft changes saved in your ButterCMS.com account. To disable this functionality, set the following value in your .env file: REACT_APP_BUTTER_CMS_PREVIEW=false
