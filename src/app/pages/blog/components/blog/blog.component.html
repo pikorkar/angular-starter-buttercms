@@ -1,17 +1,20 @@
 <ng-container *ngIf="(posts || post); else loading">
-  <app-seo
-    *ngIf="blogType !== 'post'"
-    [title]="'Sample Blog - ' + title"
-    [description]="'Sample blog powered by ButterCMS, showing ' + title"
-  >
-  </app-seo>
-  <app-seo
-    *ngIf="blogType === 'post'"
-    [title]="post.seo_title"
-    [description]="post.meta_description"
-    [image]="post.featured_image"
-  >
-  </app-seo>
+
+  <ng-container *ngIf="!pageLoading">
+    <app-seo
+      *ngIf="blogType !== 'post'"
+      [title]="'Sample Blog - ' + title"
+      [description]="'Sample blog powered by ButterCMS, showing ' + title"
+    >
+    </app-seo>
+    <app-seo
+      *ngIf="blogType === 'post'"
+      [title]="post.seo_title"
+      [description]="post.meta_description"
+      [image]="post.featured_image"
+    >
+    </app-seo>
+  </ng-container>
 
   <section [id]="(blogType === 'post') ? 'blog-header' : 'blog-roll'"
            [ngClass]="{'blog-roll-nav': blogType !== 'post','single-post-nav': blogType === 'post'}">
@@ -33,7 +36,7 @@
                 <ul class="breadcrumb-nav">
                   <li><a href="">Home</a></li>
                   <li><a href="blog">Blog</a></li>
-                  <li>Category: {{title}}</li>
+                  <li>Category: {{brTitle}}</li>
                 </ul>
               </ng-container>
               <ng-container *ngSwitchCase="'tag'">
@@ -41,7 +44,7 @@
                 <ul class="breadcrumb-nav">
                   <li><a href="">Home</a></li>
                   <li><a href="blog">Blog</a></li>
-                  <li>Tag: {{title}}</li>
+                  <li>Tag: {{brTitle}}</li>
                 </ul>
               </ng-container>
               <ng-container *ngSwitchCase="'search'">
@@ -49,7 +52,7 @@
                 <ul class="breadcrumb-nav">
                   <li><a href="">Home</a></li>
                   <li><a href="blog">Blog</a></li>
-                  <li>Search: {{title}}</li>
+                  <li>Search: {{brTitle}}</li>
                 </ul>
               </ng-container>
               <ng-container *ngSwitchCase="'post'">
@@ -80,7 +83,11 @@
                 <div class="col-12 col-lg-6" *ngFor="let post of posts">
                   <div class="blog-roll-card">
                     <div class="blog-roll-card-meta">
-                      <h2 class="blog-roll-card-header"><a href="#">{{post.title}}</a></h2>
+                      <h2 class="blog-roll-card-header">
+                        <a [href]="'/blog/' + post.slug" (click)="navigationChange(post.slug, undefined, undefined)">
+                          {{post.title}}
+                        </a>
+                      </h2>
                       <ul class="blog-roll-card-meta-info">
                         <li>
                           <a href="javascript:void(0)"><img

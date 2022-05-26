@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ButtercmssdkService} from '../../../../services/buttercmssdk.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {Meta} from "@angular/platform-browser";
 
 enum BLOG_TYPE {
   ALL = 'all',
@@ -18,13 +19,16 @@ export class BlogComponent implements OnInit {
   public posts;
   public categories;
   public title;
+  public brTitle;
   public post;
+  public pageLoading = false;
 
   public blogType = BLOG_TYPE.ALL;
 
   constructor(private bCMSSDKService: ButtercmssdkService,
               private route: ActivatedRoute,
-              private router: Router) {
+              private router: Router,
+              private meta: Meta) {
   }
 
   ngOnInit(): void {
@@ -47,12 +51,20 @@ export class BlogComponent implements OnInit {
   }
 
   getPosts(typeParam, slugParam, searchParam) {
+    this.pageLoading = true;
+    this.title = 'all posts';
+    this.meta.addTag({name: 'description', content: 'Sample blog powered by ButterCMS, showing ' + this.title});
+
     let filterBy = {};
-    if (typeParam === BLOG_TYPE.SEARCH) {
+    if (searchParam) {
       this.blogType = BLOG_TYPE.SEARCH;
-      this.title = searchParam;
-      this.bCMSSDKService.getButterCMS().post.search(this.title)
-        .then(res => this.posts = res.data.data)
+      this.brTitle = searchParam;
+      this.title = 'search results for ' + searchParam;
+      this.bCMSSDKService.getButterCMS().post.search(searchParam)
+        .then(res => {
+          this.posts = res.data.data;
+          this.pageLoading = false;
+        })
         .catch(_ => this.bCMSSDKService.navigateToNotFound());
     } else if (typeParam && !slugParam) {
       // can be article
@@ -60,21 +72,28 @@ export class BlogComponent implements OnInit {
         .then(res => {
           this.blogType = BLOG_TYPE.POST;
           this.post = res.data.data;
+          this.pageLoading = false;
         })
         .catch(_ => this.bCMSSDKService.navigateToNotFound());
     } else {
       if (typeParam && slugParam) {
         if (typeParam === BLOG_TYPE.CATEGORY) {
           this.blogType = BLOG_TYPE.CATEGORY;
-          this.title = slugParam;
           this.bCMSSDKService.getButterCMS().category.retrieve(slugParam)
-            .then(res => this.title = res.data.data.name);
+            .then(res => {
+              this.title = 'category: ' + res.data.data.name;
+              this.brTitle = res.data.data.name;
+              this.pageLoading = false;
+            });
           filterBy = {category_slug: slugParam};
         } else if (typeParam === BLOG_TYPE.TAG) {
           this.blogType = BLOG_TYPE.TAG;
-          this.title = slugParam;
           this.bCMSSDKService.getButterCMS().tag.retrieve(slugParam)
-            .then(res => this.title = res.data.data.name);
+            .then(res => {
+              this.title = 'tag: ' + res.data.data.name;
+              this.brTitle = res.data.data.name;
+              this.pageLoading = false;
+            });
           filterBy = {tag_slug: slugParam};
         } else {
           this.bCMSSDKService.navigateToNotFound();
@@ -82,7 +101,10 @@ export class BlogComponent implements OnInit {
       }
 
       this.bCMSSDKService.getButterCMS().post.list(filterBy)
-        .then(res => this.posts = res.data.data)
+        .then(res => {
+          this.posts = res.data.data;
+          this.pageLoading = false;
+        })
         .catch(_ => this.bCMSSDKService.navigateToNotFound());
     }
   }

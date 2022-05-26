@@ -1,10 +1,4 @@
 <ng-container *ngIf="pageData; else loading">
-  <app-seo
-    [title]="pageData.seo.title"
-    [description]="pageData.seo.description"
-    [image]="pageData.seo.image"
-  >
-  </app-seo>
   <ng-container *ngFor="let bodyItem of pageData.body">
     <ng-container [ngSwitch]="bodyItem.type">
       <ng-container *ngSwitchCase="'hero'">

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ButtercmssdkService} from '../../../../services/buttercmssdk.service';
 import {ActivatedRoute} from '@angular/router';
+import {Meta, Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-main-page',
@@ -8,16 +9,22 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class MainPageComponent implements OnInit {
 
-  public pageData;
+  public pageData = null;
   public posts;
 
-  constructor(private bCMSSDKService: ButtercmssdkService, private route: ActivatedRoute) {
+  constructor(private bCMSSDKService: ButtercmssdkService,
+              private route: ActivatedRoute,
+              public meta: Meta,
+              public title: Title) {
   }
 
   ngOnInit(): void {
     this.bCMSSDKService.getButterCMS().page.retrieve('landing-page', 'landing-page-with-components')
       .then(res => {
         this.pageData = res.data.data.fields;
+
+        this.title.setTitle(res.data.data.fields.seo.title);
+        this.meta.addTag({name: 'description', content: res.data.data.fields.seo.description.concat(' ')});
 
         setTimeout(() => {
           const f = this.route.snapshot.fragment;

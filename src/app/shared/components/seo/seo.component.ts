@@ -10,7 +10,8 @@ export class SeoComponent implements OnInit {
   @Input() description;
   @Input() image;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
