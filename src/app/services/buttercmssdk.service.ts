@@ -11,7 +11,7 @@ export class ButtercmssdkService {
 
   getButterCMS() {
     const butterCmsPreview =
-      process.env.NG_APP_ANGULAR_APP_BUTTER_CMS_PREVIEW === undefined ? false :
+      process.env.NG_APP_ANGULAR_APP_BUTTER_CMS_PREVIEW === undefined ? true :
       !(process.env.NG_APP_ANGULAR_APP_BUTTER_CMS_PREVIEW === 'false' ||
       process.env.NG_APP_ANGULAR_APP_BUTTER_CMS_PREVIEW === '0');
     return Butter(process.env.NG_APP_ANGULAR_APP_BUTTER_CMS_API_KEY, butterCmsPreview);
